@@ -1,5 +1,13 @@
-We thank you for your insightful comments and interesting questions! We are glad that you positively highlight our theoretical insights. Please find the answers to your questions.
+We thank you for your insightful comments and interesting questions! We are glad that you positively highlight our theoretical insights. Please find the answers to your questions below.
 
 > How does the integration of preconditioned Langevin dynamics with Thompson sampling specifically address the challenge of sampling efficiency in high-dimensional spaces, and what inspired this novel approach over other potential methods?
 
+- Thank you for bringing up the dimensionality problem. 
+- 
 
+
+
+> Given the paper's reduction of restrictive assumptions in achieving an regret bound, what theoretical or practical limitations were encountered in removing these assumptions, and how were they overcome?
+
+
+> Can you summarize the core difficulties in theoretical analysis of this integration? How do overcome them?
