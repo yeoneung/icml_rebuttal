@@ -79,8 +79,10 @@ Page 36 line 1927. I don’t think we can apply tower rule this way.
 
 Thank you for your sincere engagement with our paper. Despite a stated lack of expertise, we appreciate your perspective.
 
-> One of the contributions outlined is "online learning of LQR without a stabilizing parameter set". I wonder how this compares to the work of Black-Box Control for Linear Dynamical Systems, Chen and Hazan 2021?
+> Q1: One of the contributions outlined is "online learning of LQR without a stabilizing parameter set". I wonder how this compares to the work of Black-Box Control for Linear Dynamical Systems, Chen and Hazan 2021?
 
-> How restrictive is the curvature assumption on $p_w$?
+
+
+> Q2: How restrictive is the curvature assumption on $p_w$?
 
 Here is our answer to your question. With regard to Assumption 2.1, we respectfully suggest that Assumption 2.1 aligns with established standards, equivalent as enforcing log-concavity on the density function and Lipschitz smoothness on the gradient of the density function, as discussed in (Dwivedi et al., 2018). Additionally, we note that another study addressing Bayesian regret bounds (Ouyang et al., 2019) introduces the Gaussian noise assumption, which remains consistent with our assumption. To be more illustrative, let us consider probability density functions defined in $\mathbb{R}$. Then any probability density function $p_w(z) \sim \mathcal{N}(0, {\sigma}^2)$ where $ \frac{1}{\overline m}\leq \sigma^2 \leq \frac{1}{\underline m}$ satisfies Assumption 2.1. One can also include some asymmetric distributions as well. For instance, for $z\in \mathbb{R}$, one can $p_w(z)$ to satisfy $ -\frac{d^2 \log p_w(z)}{d z^2}=\underline m$ if $z<-1$, $ -\frac{d^2 \log p_w(z)}{d z^2}=\overline m$ if $z>1$ and $-\frac{d^2 \log p_w(z)}{d z^2}=(\overline m -\underline m)/2 \cdot z + \underline m + (\overline m - \underline m )/2$ if $z\in(-1,1)$, which represents an asymmetric probability distribution. Hence, we carefully claim that  Assumption 2.1 seems to restrictive but include many other distributions beyond Gaussian distributions.
