@@ -27,13 +27,14 @@ We thank you for the review and appreciate your time reviewing our paper as well
 - Q3: Section 2.3: it would be helpful if the authors clearly described the relation between episode k and time there.
 In particular, I am confused because it is not clear whether the posterior is sampled only at the beginning of the episode or at each time t after it is updated. (This is only clear after looking at the algorithm)
 
-- Q4: We admit that $N \geq O( (\lambda_{\max} / \lambda_{\min})^2)$ should be changed to $N \geq \Omega( (\lambda_{\max} / \lambda_{\min})^2)$ where $\Omega $ indicates. In Theorem 2.3, we Moreover, how does this theorem imply the concentration of X_n to sample from p?
-- We use $a_n = O(b_n)$ whenever $\limsup_{n \to \infty} |a_n/b_n |< \infty$, employ $a_n = \Omega(b_n)$ for $\liminf_{n \to \infty}|a_n/b_n |>0$.
+- Q4: - We use $a_n = O(b_n)$ whenever $\limsup_{n \to \infty} |a_n/b_n |< \infty$, employ $a_n = \Omega(b_n)$ for $\liminf_{n \to \infty}|a_n/b_n |>0$. We also admit that $N \geq O( (\lambda_{\max} / \lambda_{\min})^2)$ should be changed to $N = \Omega( (\lambda_{\max} / \lambda_{\min})^2)$.
+
+ In Theorem 2.3, we Moreover, how does this theorem imply the concentration of X_n to sample from p?
+
 
 - Q5: 197-202C2: Is it obvious that preconditioning by P_t (7) reduces N? If so, how? How is the preconditioning introduced in the main algorithm different from the typical preconditioning used in ULA?
 
 - Q6: Sec. 3.2: The idea for choosing stabilizing parameters is adapted from Abeille & Lazaric(2018). I think the authors should specify their contribution clearly.
-
 # Reviewer 3
 I have the following major concerns:
 
