@@ -9,6 +9,8 @@ We thank you for your insightful comments and interesting questions! We are glad
 Suppose Assumption 2.1 holds and the potential of the prior satisfies $\nabla^2_\theta U_1(\cdot)= \lambda I_{dn}$ for some $\lambda>0$. Then, for all $\theta$ and $t$, we have
 $m I_{dn} \preceq  P_t^{-\frac{1}{2}}\nabla^2 U_t(\theta)P_t^{-\frac{1}{2}}  \preceq M I_{dn}$, where $m=\min\{ \underline m, 1\}$ and $M = \max {\overline m, 1}$. 
 
+$\mathbb{E}_{x \sim p, \tilde{x} \sim p_N}\big[| x- \tilde{x} |^2\big ]^{\frac{1}{2}} \leq O\bigg( \sqrt{\frac{1}{\lambda_{\min}}}\bigg)$
+
 > Given the paper's reduction of restrictive assumptions in achieving an regret bound, what theoretical or practical limitations were encountered in removing these assumptions, and how were they overcome?
 
 
