@@ -79,7 +79,6 @@ Page 36 line 1927. I don’t think we can apply tower rule this way.
 
 Thank you for your sincere engagement with our paper. Despite a stated lack of expertise, we appreciate your perspective.
 
-One of the contributions outlined is "online learning of LQR without a stabilizing parameter set". I wonder how this compares to the work of Black-Box Control for Linear Dynamical Systems, Chen and Hazan 2021?
+- Q1: One of the contributions outlined is "online learning of LQR without a stabilizing parameter set". I wonder how this compares to the work of Black-Box Control for Linear Dynamical Systems, Chen and Hazan 2021?
 
-How restrictive is the curvature assumption on 
-?
+- Q2: With regard to Assumption 2.1, we respectfully suggest that Assumption 2.1 aligns with established standards, equivalent as enforcing log-concavity on the density function and Lipschitz smoothness on the gradient of the density function, as discussed in (Dwivedi et al., 2018). Additionally, we note that another study addressing Bayesian regret bounds (Ouyang et al., 2019) introduces the Gaussian noise assumption, which remains consistent with our assumption.  
