@@ -44,12 +44,23 @@ The assumptions are complicated and lack of explanation. For example, Assumption
 Although the regret bound matches the SOTA, what about the sample complexity? Note that a rejection sampling is used in the algorithm design. Can you quantify the number of samples used in the estimation?
 I also have minor questions:
 
-Why could you assume the prior distribution 
- as known? What can be an initial guess of the prior distribution in practice?
- is used in both the ARE and in defining the preconditioned matrix. Use two notations
-In algorithm 1, 
- is updated in each time step while 
- is updated by the end of each episode. What is the difference between these two parameters?
+We deeply appreciate your insightful comments and inputs.
+
+- Q1: The 
+- Q2: 
+- Q3: 
+- Q4:
+
+Answer to the minor questions
+- Q1: In regard to the prior distribution $\mu_1$, we only need to assume that the prior distribution $\mu_1$ follows the Gaussian whose covariance is less than 1 to carry over our analysis. Hence, any choice for the mean of $\mu_1$ can be used. In our empirical verification, we have set the mean of each component of the prior distribution to be 0.5 which is simply our random guess.
+
+- Q2: Thank you for the suggestion. We will fix it in the updated version.
+
+- Q3: Sampling $\theta_j$ for each $j$ corresponds to simulating the discretized SDE given as $\theta_{j+1}=\theta_j - \tilde \gamma_k \tilde P_k^{-1}\nabla U_k(\theta_j) +\sqrt{2\gamma \tilde P_k^{-1}} W_j$ where the Brownian motion $W_j$ has to be taken into account. After iterating $\tilde N_k$ times, we check that if $\theta_{\tilde N_k}$ satisfies the rejection condition (line 220 - 222),
+>Following (Abeille & Lazaric, 2018),  we let $\mathcal{C}:=\{\theta \in \mathbb{R}^{dn}:|\theta|\leq S,|A+BK(\theta)|\leq \rho<1, J(\theta)\leq M_J\}$ for some $S,\rho,M_J>0$ and ${\theta} = \mathrm{vec}([A \quad B]^{\top})$. 
+
+Once satisfied, we set $\tilde \theta_k := \theta_{\tilde N_k}$. In short, sampling $\theta_j$ is an intermediate system parameter used for the Langevin iteration, and $\tilde \theta_k$ denotes the system parameter we use for the next episode $k+1$. 
+
 # Reviewer 4
 
 I think the paper “Single timescale actor-critic method to solve the linear quadratic regulator with convergence guarantees” (JMLR2023) can be added to the related work. This paper uses the inverse of Fisher information matrix as preconditioner for policy gradient in the LQR problem. It also injects a noise in the control for exploration. Below are details of my questions.
