@@ -6,7 +6,7 @@ We thank you for your insightful comments and interesting questions! We are glad
 
 (a) Thank you for bringing up the dimensionality problem. 
 
-(b) For the motivation of our approach, we would like to mention Theorem 2.3 where it is noted that the stepsize $\gamma= O\big (\frac{\lambda_{\min}}{\lambda_{\max}^2}\big )$ and the number of iterations $N$ satisfy $N \geq O  \big ((\frac{\lambda_{\max}}{\lambda_{\min}} )^2\big )$ to achieve $1/{\lambda_{\min}}$ rate of convergence when the standard ULA is used. On the other hand, by normalizing the potential $\nabla^2U$ with the preconditioner constructed from the data, we have a uniform bound of the curvature of $\nabla^2 U$ (Lemma 3.1), which allows us to use a smaller number of step iterations as suggested in (8) while achieving a better regret bound.
+(b) For the motivation of our approach, we would like to mention Theorem 2.3 where it is noted that the stepsize $\gamma= O\big (\frac{\lambda_{\min}}{\lambda_{\max}^2}\big )$ and the number of iterations $N$ satisfy $N = O  \big ((\frac{\lambda_{\max}}{\lambda_{\min}} )^2\big )$ to achieve $1/{\lambda_{\min}}$ rate of convergence when the standard ULA is used. On the other hand, by normalizing the potential $\nabla^2U$ with the preconditioner constructed from the data, we have a uniform bound of the curvature of $\nabla^2 U$ (Lemma 3.1), which allows us to use a smaller number of step iterations as suggested in (8) while achieving a better regret bound.
 
 - Q2: 
 
@@ -28,6 +28,7 @@ We thank you for the review and appreciate your time reviewing our paper as well
 In particular, I am confused because it is not clear whether the posterior is sampled only at the beginning of the episode or at each time t after it is updated. (This is only clear after looking at the algorithm)
 
 - Q4: We admit that $N \geq O( (\lambda_{\max} / \lambda_{\min})^2)$ should be changed to $N \geq \Omega( (\lambda_{\max} / \lambda_{\min})^2)$ where $\Omega $ indicates. In Theorem 2.3, we Moreover, how does this theorem imply the concentration of X_n to sample from p?
+- We use $a_n = O(b_n)$ whenever $\limsup_{n \to \infty} |a_n/b_n |< \infty$, employ $a_n = \Omega(b_n)$ for $\liminf_{n \to \infty}|a_n/b_n |>0$.
 
 - Q5: 197-202C2: Is it obvious that preconditioning by P_t (7) reduces N? If so, how? How is the preconditioning introduced in the main algorithm different from the typical preconditioning used in ULA?
 
