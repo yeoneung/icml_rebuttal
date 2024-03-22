@@ -8,9 +8,9 @@ We thank you for your insightful comments and interesting questions! We are glad
 
 (b) For the motivation of our approach, we would like to mention Theorem 2.3 where it is noted that the stepsize $\gamma= O\big (\frac{\lambda_{\min}}{\lambda_{\max}^2}\big )$ and the number of iterations $N$ satisfy $N = O  \big ((\frac{\lambda_{\max}}{\lambda_{\min}} )^2\big )$ to achieve $1/{\lambda_{\min}}$ rate of convergence when the standard ULA is used. On the other hand, by normalizing the potential $\nabla^2U$ with the preconditioner constructed from the data, we have a uniform bound of the curvature of $\nabla^2 U$ (Lemma 3.1), which allows us to use a smaller number of step iterations as suggested in (8) while achieving a better regret bound.
 
-- Q2: 
+- Q2: Ouyang의 restrictive한 가정을 제거하면 state의 norm이 지수적으로 커지게되면서 덩달아 cost가 커져 이론적으로나, 실험적으로 둘다 regret이 지수적으로 가파르게 증가하는 문제가 생긴다. 이를 해결하기 위해 우선 Abeille에서 사용되었던 compact set에 rejection하는 방식으로 바꾸었다. True system parameter에 대한 concentration은 O(1/\sqrt{lambda_min})이고, 점점 수렴할수록 true system parameter와 가까운 값을 뽑을 가능성이 큼으로, state의 폭발을 야기하는 system parameter를 샘플링할 가능성이 적어진다. 그러므로 action에 noise를 첨가하는 방식으로 lambda_min의 polynomial한 증가를 이끌어내어 true system parameter와 멀리 떨어져 있어 state의 폭발을 야기하는 system parameter를 뽑을 확률을 최대한 작게 control하여 state moment의 constant bound를 유도하였다. 
 
-- Q3: 
+- Q3: 랑주뱅과 톰슨샘플링의 결합에서의 핵심은 랑주뱅으로 posterior의 근사샘플링을 하는 것이다. 상당부분 mazumdar의 결과를 가져왔는데, 마줌다는 reward function에 대해 strongly log concave하다는 가정을 하였다. LQR setting에서는 reward function에 대응되는 것이 log-concave하기 때문에 naive하게 가져오면 posterior가 strongly log-concavity가 data에 따라 linear하게 증가하지않아, number of iteration에 중요한 요소인condition number가 엄청나게 증가하여 computational inefficiency를 야기한다. 그러므로 이 문제를 해결하기 위하려 preconditioning matrix를 도입하였으며 이로 인해 lamda_min과 \lambda_max의 격차를 normalizing함으로써 줄일 수 있었고 이로인해 computational efficiency를 달성할 수 있었다. 
 
 # Reviewer 2
 
@@ -25,6 +25,7 @@ We thank you for the review and appreciate your time reviewing our paper as well
 (b) As highlighted, the stochastic nature of the policy is indeed a central aspect, as we adopt the framework of Thompson Sampling (TS) where actions are expressed as $u_t=K x_t$ or $u_t=K x_t+ \nu_t$, as illustrated in Figure 1. The inclusion of Section 2.1 serves to inspire readers regarding such an exploration scheme, drawing parallels to the stochastic Linear Quadratic Regulation (LQR) problem under Gaussian perturbation, where the optimal control action is expressed as $u_t=K x_t$ (Theorem 2.2). Lastly, we acknowledge the typo regarding the notation $\pi_t: H_t \rightarrow \mathbb{R}^m$, which should be corrected to $\pi_t: H_t \rightarrow \mathbb{R}^{n_u}$, and we assure you that this will be reflected in the revised version.
 
 - Q3: Thank you for the suggestion. We will add the relation between $t$ and $k$ in the beginning of Section 2.3 for better clarity.
+
 
 - Q4:  We use $a_n = O(b_n)$ whenever $\limsup_{n \to \infty} |a_n/b_n |< \infty$, employ $a_n = \Omega(b_n)$ for $\liminf_{n \to \infty}|a_n/b_n |>0$. We also admit that $N \geq O( (\lambda_{\max} / \lambda_{\min})^2)$ should be changed to $N = \Omega( (\lambda_{\max} / \lambda_{\min})^2)$.  For the concentration, $X_N$ comes from the ULA given by $X_{j+1} = X_j - \gamma_j \nabla U(X_j) + \sqrt{2\gamma_j} W_j$ and its distribution is denoted by $p_N$. Since probability density functions exist for both $p_N$ and $p$, the integration in Theorem 2.3 measures the difference between them.
 
@@ -89,8 +90,13 @@ Page 36 line 1927. I don’t think we can apply tower rule this way.
 
 Thank you for your sincere engagement with our paper. Despite a stated lack of expertise, we appreciate your perspective.
 
-> Q1: One of the contributions outlined is "online learning of LQR without a stabilizing parameter set". I wonder how this compares to the work of Black-Box Control for Linear Dynamical Systems, Chen and Hazan 2021?
+weakness 1
+우리의 주제는 Bayesian setting에서의 TS-based LQR online learning이고 이와 비교할 수 있는 paper는 ouyang과 gagrini가 있다. $\tilde{O}(\sqrt(T))$ regret bound를 얻기 위해서 그들은 unrealizable 한 compact set을 고려하였다. Ouyang은 compact set에 rejection하기 위해 반드시 우리가 구하고자 하는 true system parameter를 알아야 하고, gargrini는 실험적으로 구현 불가능한 compact set을 제시하였다. 이 두 paper의 한계점은 related work에서 102c1~60c2에 잘 서술되어 있다. 또한 이런 한계점들을 우리가 어떻게 극복하고 $O(\sqrt(T))$의 bound를 얻었는지 193c1~207c1, 에 서술되어있다. 2578 에는 실험적으로 ouyang과 comparison한 결과가 있다.
 
+weakness 2
+두 번째 assumption은 prior에 관한 것이다. Prior는 우리가 선택해서 잡을 수 있기 때문에 restrictive한 assumption이 아니다. 세 번째 assumption은 우리가 action을 취할 때 고의적으로 넣는 perturbation이다. 다시 말해 우리가 구하고자 하는 unknown system parameter과는 무관한, 우리가 원하는 대로 잡을 수 있는 값이다.
+
+> Q1: One of the contributions outlined is "online learning of LQR without a stabilizing parameter set". I wonder how this compares to the work of Black-Box Control for Linear Dynamical Systems, Chen and Hazan 2021?
 
 
 > Q2: How restrictive is the curvature assumption on $p_w$?
