@@ -67,7 +67,8 @@ I think the paper “Single timescale actor-critic method to solve the linear qu
 
 Major problems
 
-- Q1: In theorem 2.3, you only state the separate distribution of and , but did not specify their joint distribution. We cannot compute the expectation in this case. I guess they are not independent, right? As a follow up, I notice that you say “we use the same Brownian motion” in line 583, proof of Lemma A.1. Maybe you mean the Wasserstein distance between the two distributions in this theorem and also in Lemma A.1?
+- Q1: Thank you so much for the input. 
+- In theorem 2.3, you only state the separate distribution of and , but did not specify their joint distribution. We cannot compute the expectation in this case. I guess they are not independent, right? As a follow up, I notice that you say “we use the same Brownian motion” in line 583, proof of Lemma A.1. Maybe you mean the Wasserstein distance between the two distributions in this theorem and also in Lemma A.1?
 
 - Q2: As a follow up, for Proposition 4.1 and Lemma A.3, maybe you also mean the Wasserstein distance is bounded by Dp. Or alternatively, at least we shall specify that 
  and share the same realization of Brownian motion in the statement of the proposition.
