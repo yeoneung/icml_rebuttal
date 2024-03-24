@@ -1,16 +1,20 @@
 # Reviewer 1
 
-We thank you for your insightful comments and interesting questions! We are glad that you positively highlight our theoretical insights. Please find the answers to your questions below.
+Thank you for your insightful comments and engaging questions. Here are answers to your concerns and questions.
 
 - Q1:
 
-  - Thank you for bringing up the dimensionality problem. 
+  - Equation (8) demonstrates that the iteration count scales with $\lambda\_{\min}$, approximately $\lambda_{\min} \approx 1/n$ where $n$ represents the state dimension. Consequently, the iteration growth remains at most linear in $n$. Although not explicitly stated in the paper, our computations for $n=2,4,6,8,10$ reveal sublinear growth.
 
-  - To motivate our approach, we would like to mention Theorem 2.3 where it is noted that the stepsize $\gamma= O\big (\frac{\lambda\_{\min}}{\lambda\_{\max}^2}\big )$ and the number of iterations $N$ satisfy $N = O  \big ((\frac{\lambda\_{\max}}{\lambda\_{\min}} )^2\big )$ to achieve $1/{\lambda_{\min}}$ rate of convergence when the standard ULA is used. On the other hand, by normalizing the potential $\nabla^2U$ with the preconditioner constructed from the data, we have a uniform bound of the curvature of $\nabla^2 U$ (Lemma 3.1), which allows us to use a smaller number of step iterations as suggested in (8) while achieving a better regret bound.
+  - Our approach is further motivated by Theorem 2.3, where it is established that the step size $\gamma= O(\lambda_{\min}/\lambda_{\max}^2)$ and the number of iterations $N$ satisfy $N = O((\lambda_{\max}/\lambda_{\min})^2)$ for achieving a convergence rate of $1/\lambda_{\min}$ with ULA. By normalizing the potential $\nabla^2U$ with a preconditioner derived from the data (Lemma 3.1), we achieve a uniform bound on the curvature of $\nabla^2 U$, enabling a smaller number of step iterations as suggested in (8) while attaining superior regret bounds.
 
-- Q2: Removing the restrictive assumption in (Ouyang et al., 2019) 's restrictive assumption leads to the exponential growth of the state norm, causing the cost to increase exponentially. The introduction of a stabilizing controller in the aforementioned literature prevents this phenomenon but by no means we can choose such a controller without knowing the true system parameters. To address this issue, we simply implement a verifiable compact set employed by Abeille & Lazaric(2018). We have rigorously shown that the concentration between distributions of approximate and the true system parameter converges at the rate of $\tilde O(1/\sqrt{\lambda_{\min}})$ and deduce that $\lambda\_{\min} increases polynomially in time $t$ as the learning proceeds. To obtain the property, we inject a noise once in each episode. Combining these novel results, it is shown that the state achieves the uniform bound, which is the part where key difficulty lies in when removing the restrictive assumption above.
+- Q2:
 
-- Q3: Sampling from a posterior distribution, or Thompson sampling, often requires high computational resources in learning LQR problems. The purpose of the implementation of precondition is to alleviate this challenge. Though sample complexity for naive ULA is well studied, those for preconditioned ULA are relatively less explored. In this paper, we introduce modified stepsize as well as the number of step iterations which leads to an improved computational efficiency. Furthermore, our choices of such parameters yield a better regret. 
+  - Relaxing the restrictive assumption in (Ouyang et al., 2019) results in exponential growth of the state norm and escalating costs. While introducing a stabilizing controller in prior work mitigates this issue, selecting such a controller without knowledge of the true system parameters is impractical. To address this challenge, we employ a verifiable compact set as utilized by (Abeille & Lazaric, 2018). Our rigorous analysis demonstrates that the concentration between distributions of approximate and the true system parameter converges at a rate of $\tilde O(1/\sqrt{\lambda_{\min}})$. We deduce that $\lambda_{\min}$ increases polynomially over time $t$ as the learning progresses. To achieve this, we inject noise once in each episode. Combining these novel findings, we demonstrate that the state achieves a uniform bound, a critical aspect where the key difficulty lies in removing the aforementioned restrictive assumption.
+
+- Q3:
+
+Sampling from a posterior distribution, such as Thompson sampling, often demands significant computational resources in learning LQR problems. The implementation of preconditioning aims to alleviate this challenge. While sample complexity for naive ULA is well-studied, those for preconditioned ULA are relatively less explored. In our paper, we introduce modified step sizes and the number of step iterations, leading to improved computational efficiency. Moreover, our carefully chosen parameters result in better regrets.
 
 # Reviewer 2
 
@@ -71,16 +75,19 @@ Once satisfied, we set $\tilde \theta_k := \theta_{\tilde N_k}$. In short, sampl
 
 # Reviewer 4
 
-Thank you so much for carefully reading our paper and giving us invaluable input. Your comments are all to the point and we would like to address them very carefully. Regardless of this, in the paper you mentioned, the authors implement the inverse of the Fisher information matrix for more efficient gradient descent and convergence guarantee which aligns with the core idea of our paper yet scope is a bit different as we focus on improved regret. We will make sure to include in the related work in the revised version. 
+Thank you so much for carefully reading our paper and giving us invaluable input. Your comments are all to the point and we would like to address them very carefully. Besides, in the paper you mentioned, the authors implement the inverse of the Fisher information matrix for more efficient gradient descent and convergence guarantee which aligns with the core idea of our paper yet scope is a bit different as we focus on improved regret. We will make sure to include it in the revised version. 
 
 - Q1: You are absolutely right that two distributions $p$ and $p_N$ are dependent so that joint distribution should have been specified. As pointed out, the expectations in Theorem 2.3 and Lemma A.1 are taken over joint distribution generated by the shared Brownian motion. We will revise the statement to clarify it in the revised version.
 
 - Q2: Similar to Q1, Proposition 4.1 holds only if samples from exact and approximate posterior share the same Brownian motion. On the other hand, two key properties for the exact posterior $\mu_t$ stated in Proposition 4.2 and the first part of Theorem 4.5 hold true regardless of the coupling as only stochastic properties are leveraged. 
 
 Summarizing Q1 and Q2, whenever expectation is taken for $\mu\_t$ and $\tilde \mu\_t$, we mean that joint distribution comes from the coupling induced by the shared Brownian motion.
-- Q3: Sorry, we have the wrong definition. We newly definte $X$ and $Y$ as $X=[ w\_1 \cdots w_t ]\^\top$ and $Y = [ K(\tilde{\theta}\_k)w\_1  \cdots  K(\\tilde{\theta}\_k)w\_t ]^{\top}$. Then it is clear to have such a form.
+
+- Q3. Sorry for the confusion. For $\mathcal{J}\_k = \\{n_i:n\_1<n_2<\ldots<n\_{k(k+1)/2}\\}$, we newly definte $X$ and $Y$ as $X=[ w\_{n\_1-1} \quad \cdots \quad \_{n\_{k(k+1)/2}-1} ]^\top$ and $Y = [ K_{\nu(n_1)}w_{n_1-1} \quad \cdots \quad K\_{\nu(n\_{k(k+1)/2})}w\_{ n\_{k(k+1)/2}-1} ]^{\top}$. Then it is clear to have such a form.
+
 - Q4: Regarding the tower rule in page 36 line 1927, if I understood your question correctly, we always mean the true system parameter random variable by $\overline \theta_*$ throughout the paper, and hence, conditioning with respect to the history collected before $k$th episode makes sense. In line 1927, $\overline \theta\_*$ in both equations are random variables following the exact posterior distribution. This way the inner expectation of  $\mathbb{E} [\mathbb{E}\_{\mu\_k, \tilde \mu\_k} [|\overline \theta\_\* -\theta\_k|\^2 | h\_{t\_k}]]$ is taken for two distributions $\mu_k$ and $\tilde \mu\_k$ that share the Brownian motion, and outer expectation is taken over all histories before the $k$th episode.
 
+For the minor problems raised, we will updated in the revised version.
 
 # Reviewer 5
 
