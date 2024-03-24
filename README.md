@@ -90,8 +90,8 @@ Addressing your two concerens, one with comparison with other works and the othe
 
 Regarding the justification, let us provide justification for assumptions on (a) the prior distribution (Assumption 3.2) (b) injected noise $\nu$ (Assumption 3.3) (c) system parameter. 
 - For the prior distribution
-- 
-- 
+- The artificial noise $\nu_s$ following Gaussian distribution is injected at $t=t\_k - 1$ for better exploration. Since we can use any control action to observe the reward, any assumption on infused $\nu$ should be acceptable. The Gaussian distribution is chosen for the ease of analysis and random exploration. 
+- We assume that the true system parameter comes from the set $\mathcal{C}$ illustraed in line 220-223, which is from (Abeille & Lazaric, 2018). Understanding $K(\theta)$ and $J(\theta)$ as a continuosly differentiable function of $\theta$, one can consider inverse images of these functions of compact sets. Given positive numbers, $S,\rho,M\_J$, one can always realize a set $\mathcal{C}$ such that $\theta \in \mathcal{C}$ satisfies $|\theta| \leq S$, $|A+BK(\theta) \leq \rho <1$, and $|J(\theta) \leq M_J$ where $\theta = vec([A \quad B])\^\top$.
 
 weakness 2
 두 번째 assumption은 prior에 관한 것이다. Prior는 우리가 선택해서 잡을 수 있기 때문에 restrictive한 assumption이 아니다. 세 번째 assumption은 우리가 action을 취할 때 고의적으로 넣는 perturbation이다. 다시 말해 우리가 구하고자 하는 unknown system parameter과는 무관한, 우리가 원하는 대로 잡을 수 있는 값이다.
