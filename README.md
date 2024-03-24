@@ -72,7 +72,7 @@ Summarizing Q1 and Q2, whenever expectation is taken for $\mu\_t$ and $\tilde \m
 
 - Q4: Regarding the tower rule in page 36 line 1927, if I understood your question correctly, we always mean the true system parameter random variable by $\overline \theta_*$ throughout the paper, and hence, conditioning with respect to the history collected before $k$th episode makes sense. In line 1927, $\overline \theta\_*$ in both equations are random variables following the exact posterior distribution. This way the inner expectation of  $\mathbb{E} [\mathbb{E}\_{\mu\_k, \tilde \mu\_k} [|\overline \theta\_\* -\theta\_k|\^2 | h\_{t\_k}]]$ is taken for two distributions $\mu_k$ and $\tilde \mu\_k$ that share the Brownian motion, and outer expectation is taken over all histories before the $k$th episode.
 
-For the minor problems raised, we will updated in the revised version.
+For the minor problems raised, we will be updated in the revised version.
 
 # Reviewer 5
 
