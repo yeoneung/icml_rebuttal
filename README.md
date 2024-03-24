@@ -2,11 +2,11 @@
 
 We thank you for your insightful comments and interesting questions! We are glad that you positively highlight our theoretical insights. Please find the answers to your questions below.
 
-- Q1: 
+- Q1:
 
-- (a) Thank you for bringing up the dimensionality problem. 
+  - Thank you for bringing up the dimensionality problem. 
 
-- (b) To motivate our approach, we would like to mention Theorem 2.3 where it is noted that the stepsize $\gamma= O\big (\frac{\lambda\_{\min}}{\lambda\_{\max}^2}\big )$ and the number of iterations $N$ satisfy $N = O  \big ((\frac{\lambda\_{\max}}{\lambda\_{\min}} )^2\big )$ to achieve $1/{\lambda_{\min}}$ rate of convergence when the standard ULA is used. On the other hand, by normalizing the potential $\nabla^2U$ with the preconditioner constructed from the data, we have a uniform bound of the curvature of $\nabla^2 U$ (Lemma 3.1), which allows us to use a smaller number of step iterations as suggested in (8) while achieving a better regret bound.
+  - To motivate our approach, we would like to mention Theorem 2.3 where it is noted that the stepsize $\gamma= O\big (\frac{\lambda\_{\min}}{\lambda\_{\max}^2}\big )$ and the number of iterations $N$ satisfy $N = O  \big ((\frac{\lambda\_{\max}}{\lambda\_{\min}} )^2\big )$ to achieve $1/{\lambda_{\min}}$ rate of convergence when the standard ULA is used. On the other hand, by normalizing the potential $\nabla^2U$ with the preconditioner constructed from the data, we have a uniform bound of the curvature of $\nabla^2 U$ (Lemma 3.1), which allows us to use a smaller number of step iterations as suggested in (8) while achieving a better regret bound.
 
 - Q2: Removing the restrictive assumption in (Ouyang et al., 2019) 's restrictive assumption leads to the exponential growth of the state norm, causing the cost to increase exponentially. The introduction of a stabilizing controller in the aforementioned literature prevents this phenomenon but by no means we can choose such a controller without knowing the true system parameters. To address this issue, we simply implement a verifiable compact set employed by Abeille & Lazaric(2018). We have rigorously shown that the concentration between distributions of approximate and the true system parameter converges at the rate of $\tilde O(1/\sqrt{\lambda_{\min}})$ and deduce that $\lambda\_{\min} increases polynomially in time $t$ as the learning proceeds. To obtain the property, we inject a noise once in each episode. Combining these novel results, it is shown that the state achieves the uniform bound, which is the part where key difficulty lies in when removing the restrictive assumption above.
 
@@ -18,11 +18,11 @@ We thank you for the review and appreciate your time reviewing our paper as well
 
 - Q1: Sec 2.2: Can truth be random? First, authors say that \theta^* is an unknown true parameter, but later in the same section, they say that \theta^* is random. Moreover, if you know the distribution of \theta^*, why do you update it using data? If you recall, the objective of the Bayesian experiment is to recover the truth, so if the truth itself is random, can we recover the random truth using the Bayesian posterior?
 
-- Q2
-  
-(a) Concerning Assumption 2.1, we respectfully suggest that Assumption 2.1 aligns with established standards, equivalent as enforcing log-concavity on the density function and Lipschitz smoothness on the gradient of the density function, as discussed in (Dwivedi et al., 2018). Additionally, we note that another study addressing Bayesian regret bounds (Ouyang et al., 2019) introduces the Gaussian noise assumption, which remains consistent with our assumption.
+- Q2: 
 
-(b) As highlighted, the stochastic nature of the policy is indeed a central aspect, as we adopt the framework of Thompson Sampling (TS) where actions are expressed as $u_t=K x_t$ or $u_t=K x_t+ \nu_t$, as illustrated in Figure 1. The inclusion of Section 2.1 serves to inspire readers regarding such an exploration scheme, drawing parallels to the stochastic Linear Quadratic Regulation (LQR) problem under Gaussian perturbation, where the optimal control action is expressed as $u_t=K x_t$ (Theorem 2.2). Lastly, we acknowledge the typo regarding the notation $\pi_t: H_t \rightarrow \mathbb{R}^m$, which should be corrected to $\pi_t: H_t \rightarrow \mathbb{R}^{n_u}$, and we assure you that this will be reflected in the revised version.
+  - Concerning Assumption 2.1, we respectfully suggest that Assumption 2.1 aligns with established standards, equivalent as enforcing log-concavity on the density function and Lipschitz smoothness on the gradient of the density function, as discussed in (Dwivedi et al., 2018). Additionally, we note that another study addressing Bayesian regret bounds (Ouyang et al., 2019) introduces the Gaussian noise assumption, which remains consistent with our assumption. 
+
+  - As highlighted, the stochastic nature of the policy is indeed a central aspect, as we adopt the framework of Thompson Sampling (TS) where actions are expressed as $u_t=K x_t$ or $u_t=K x_t+ \nu_t$, as illustrated in Figure 1. The inclusion of Section 2.1 serves to inspire readers regarding such an exploration scheme, drawing parallels to the stochastic Linear Quadratic Regulation (LQR) problem under Gaussian perturbation, where the optimal control action is expressed as $u_t=K x_t$ (Theorem 2.2). Lastly, we acknowledge the typo regarding the notation $\pi_t: H_t \rightarrow \mathbb{R}^m$, which should be corrected to $\pi_t: H_t \rightarrow \mathbb{R}^{n_u}$, and we assure you that this will be reflected in the revised version.
 
 - Q3: Thank you for the suggestion. We will add the relation between $t$ and $k$ in the beginning of Section 2.3 for better clarity.
 
@@ -32,6 +32,7 @@ We thank you for the review and appreciate your time reviewing our paper as well
 - Q5: The reduction of the number of iterations $N$ by implementing the preconditioner should not be obvious at first glance. A typical preconditioning used in ULA does not fully exploit the upper and lower bound of $P^{-1/2} \nabla^2 U P^{1/2}$ while we leverage the uniform bound of this quantity by introducing a structural assumption on $p_w$. Using this bound we could reduce the number of iterations achieving a better concentration.
 
 - Q6: Sec. 3.2: The idea for choosing stabilizing parameters is adapted from Abeille & Lazaric(2018). I think the authors should specify their contribution clearly.
+
 
 
 # Reviewer 3
