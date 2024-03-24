@@ -1,20 +1,13 @@
 # Reviewer 1
 
 Thank you for your insightful comments and engaging questions. Here are answers to your concerns and questions.
-
 - Q1:
-
   - Equation (8) demonstrates that the iteration count scales with $\lambda\_{\min}$, approximately $\lambda_{\min} \approx 1/n$ where $n$ represents the state dimension. Consequently, the iteration growth remains at most linear in $n$. Although not explicitly stated in the paper, our computations for $n=2,4,6,8,10$ reveal sublinear growth.
-
   - Our approach is further motivated by Theorem 2.3, where it is established that the step size $\gamma= O(\lambda_{\min}/\lambda_{\max}^2)$ and the number of iterations $N$ satisfy $N = O((\lambda_{\max}/\lambda_{\min})^2)$ for achieving a convergence rate of $1/\lambda_{\min}$ with ULA. By normalizing the potential $\nabla^2U$ with a preconditioner derived from the data (Lemma 3.1), we achieve a uniform bound on the curvature of $\nabla^2 U$, enabling a smaller number of step iterations as suggested in (8) while attaining superior regret bounds.
-
 - Q2:
-
   - Relaxing the restrictive assumption in (Ouyang et al., 2019) results in exponential growth of the state norm and escalating costs. While introducing a stabilizing controller in prior work mitigates this issue, selecting such a controller without knowledge of the true system parameters is impractical. To address this challenge, we employ a verifiable compact set as utilized by (Abeille & Lazaric, 2018). Our rigorous analysis demonstrates that the concentration between distributions of approximate and the true system parameter converges at a rate of $\tilde O(1/\sqrt{\lambda_{\min}})$. We deduce that $\lambda_{\min}$ increases polynomially over time $t$ as the learning progresses. To achieve this, we inject noise once in each episode. Combining these novel findings, we demonstrate that the state achieves a uniform bound, a critical aspect where the key difficulty lies in removing the aforementioned restrictive assumption.
-
 - Q3:
-
-Sampling from a posterior distribution, such as Thompson sampling, often demands significant computational resources in learning LQR problems. The implementation of preconditioning aims to alleviate this challenge. While sample complexity for naive ULA is well-studied, those for preconditioned ULA are relatively less explored. In our paper, we introduce modified step sizes and the number of step iterations, leading to improved computational efficiency. Moreover, our carefully chosen parameters result in better regrets.
+  - Sampling from a posterior distribution, such as Thompson sampling, often demands significant computational resources in learning LQR problems. The implementation of preconditioning aims to alleviate this challenge. While sample complexity for naive ULA is well-studied, those for preconditioned ULA are relatively less explored. In our paper, we introduce modified step sizes and the number of step iterations, leading to improved computational efficiency. Moreover, our carefully chosen parameters result in better regrets.
 
 # Reviewer 2
 
