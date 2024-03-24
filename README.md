@@ -71,7 +71,7 @@ Thank you so much for carefully reading our paper and giving us invaluable input
 - Q2: Similar to Q1, Proposition 4.1 holds only if samples from exact and approximate posterior share the same Brownian motion. On the other hand, two key properties for the exact posterior $\mu_t$ stated in Proposition 4.2 and the first part of Theorem 4.5 hold true regardless of the coupling as only stochastic properties are leveraged. 
 
 Summarizing Q1 and Q2, whenever expectation is taken for $\mu_t$ and $\tilde \mu_t$, we mean that joint distribution comes from the coupling induced by the shared Brownian motion.
-- Q3: 
+- Q3: Sorry, we have wrong definition. We newly definte $X$ and $Y$ as $X=\begin{bmatrix} w_1& \cdots &w_t \end{bmatrix}^\top$ and $Y = \begin{bmatrix} K(\tilde{\theta}\_k)w\_1 & \cdots & K(\\tilde{\theta}\_k)w\_t \end{bmatrix}^{\top}$. Then it is clear to have such a form.
 - Q4: Regarding the tower rule in page 36 line 1927, if I understood your question correctly, we always mean the true system parameter random variable by $\overline \theta_*$ throughout the paper, and hence, conditioning with respect to the history collected before $k$th episode makes sense. In line 1927, $\overline \theta\_*$ in both equations are random variables following the exact posterior distribution. This way the inner expectation of  $\mathbb{E} [\mathbb{E}\_{\mu\_k, \tilde \mu\_k} [|\overline \theta\_\* -\theta\_k|\^2 | h\_{t\_k}]]$ is taken for two distributions $\mu_k$ and $\tilde \mu\_k$ that share the Brownian motion, and outer expectation is taken over all histories before the $k$th episode.
 
 
