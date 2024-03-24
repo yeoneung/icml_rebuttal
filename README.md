@@ -47,6 +47,13 @@ I also have minor questions:
 
 We deeply appreciate your insightful comments and inputs.
 
+Reviewer 3
+Q1. Bayesian setting에서 이전 work들은 크게 두 가지 문제를 갖고 있다. 첫 번째는 Gaussian noise에 관해서만 문제를 해결할 수 있었고, 두 번째는 unrealizable한 compact set에 대해 rejection sampling하는 restrictive한 가정을 사용했다는 점이다. 우리는 preconditioned ULA를 사용하여 더 general한 noise에 대해 TS-based algorithm을 사용할 수 있도록 하였고, 실험적으로 구현 가능한 가정을 사용하였다. 그 결과 regret bound를 기존의 $O(\sqrt{T\log T})$에서  $O(\sqrt{T })$로 향상시킬 수 있었다. 
+Q2. 랑주뱅과 톰슨샘플링의 결합에서의 핵심은 랑주뱅으로 posterior의 근사샘플링을 하는 것이다. Mazumdar는 multi-armed bandit에서 reward function에 대해 strongly log concave하다는 가정 하에 ULA에 관한 이론적인 분석을 하였다. 이 이론적인 결과를 LQR setting에 naive하게 적용하게 된다면 reward function에 대응되는 것이 log-concave하기 때문에, posterior가 strongly log-concavity가 data에 따라 linear하게 증가하지 않는다. 그 결과 number of iteration에 중요한 요소인condition number가 엄청나게 증가하여 computational inefficiency를 야기한다. 그러므로 이 문제를 해결하기 위하려 preconditioning matrix를 도입하였으며 이로 인해 lamda_min과 \lambda_max의 격차를 normalizing함으로써 줄일 수 있었고 이로인해 computational efficiency를 달성할 수 있었다. 
+
+Q3.기존에 stabilizing policy가 필요했던 이유는, state norm의 폭발을 막아 좋은 regret을 얻기 위함이다. 이를 쓰지 않고 state moment의 constant bound를 얻기 위해서 다음과 같은 True system parameter에 대한 concentration은 O(1/\sqrt{lambda_min})이고, 점점 수렴할수록 true system parameter와 가까운 값을 뽑을 가능성이 큼으로, state의 폭발을 야기하는 system parameter를 샘플링할 가능성이 적어진다(1769~1778)는 사실에 착안하였다. 이를 위해 action에 noise를 첨가하는 방식으로 lambda_min의 polynomial한 증가를 이끌어내어 true system parameter와 멀리 떨어져 있어 state의 폭발을 야기하는 system parameter를 뽑을 확률을 최대한 작게 control하여 state moment의 constant bound(Theorem 5.1)를 유도하였다. 
+
+
 - Q1: The 
 - Q2: 
 - Q3: 
