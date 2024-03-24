@@ -77,23 +77,27 @@ Thank you so much for carefully reading our paper and giving us invaluable input
 
 - Q2: Similar to Q1, Proposition 4.1 holds only if samples from exact and approximate posterior share the same Brownian motion. On the other hand, two key properties for the exact posterior $\mu_t$ stated in Proposition 4.2 and the first part of Theorem 4.5 hold true regardless of the coupling as only stochastic properties are leveraged. 
 
-Summarizing Q1 and Q2, whenever expectation is taken for $\mu_t$ and $\tilde \mu_t$, we mean that joint distribution comes from the coupling induced by the shared Brownian motion.
-- Q3: Sorry, we have wrong definition. We newly definte $X$ and $Y$ as $X=\begin{bmatrix} w_1& \cdots &w_t \end{bmatrix}^\top$ and $Y = \begin{bmatrix} K(\tilde{\theta}\_k)w\_1 & \cdots & K(\\tilde{\theta}\_k)w\_t \end{bmatrix}^{\top}$. Then it is clear to have such a form.
+Summarizing Q1 and Q2, whenever expectation is taken for $\mu\_t$ and $\tilde \mu\_t$, we mean that joint distribution comes from the coupling induced by the shared Brownian motion.
+- Q3: Sorry, we have the wrong definition. We newly definte $X$ and $Y$ as $X=[ w\_1 \cdots w_t ]\^\top$ and $Y = [ K(\tilde{\theta}\_k)w\_1  \cdots  K(\\tilde{\theta}\_k)w\_t ]^{\top}$. Then it is clear to have such a form.
 - Q4: Regarding the tower rule in page 36 line 1927, if I understood your question correctly, we always mean the true system parameter random variable by $\overline \theta_*$ throughout the paper, and hence, conditioning with respect to the history collected before $k$th episode makes sense. In line 1927, $\overline \theta\_*$ in both equations are random variables following the exact posterior distribution. This way the inner expectation of  $\mathbb{E} [\mathbb{E}\_{\mu\_k, \tilde \mu\_k} [|\overline \theta\_\* -\theta\_k|\^2 | h\_{t\_k}]]$ is taken for two distributions $\mu_k$ and $\tilde \mu\_k$ that share the Brownian motion, and outer expectation is taken over all histories before the $k$th episode.
 
 
 # Reviewer 5
 
-Thank you for your sincere engagement with our paper. Despite a stated lack of expertise, we appreciate your perspective.
+Thank you for your sincere engagement with our paper. Despite a stated lack of expertise, we appreciate your perspective. 
 
-weakness 1
-우리의 주제는 Bayesian setting에서의 TS-based LQR online learning이고 이와 비교할 수 있는 paper는 ouyang과 gagrini가 있다. $\tilde{O}(\sqrt(T))$ regret bound를 얻기 위해서 그들은 unrealizable 한 compact set을 고려하였다. Ouyang은 compact set에 rejection하기 위해 반드시 우리가 구하고자 하는 true system parameter를 알아야 하고, gargrini는 실험적으로 구현 불가능한 compact set을 제시하였다. 이 두 paper의 한계점은 related work에서 102c1~60c2에 잘 서술되어 있다. 또한 이런 한계점들을 우리가 어떻게 극복하고 $O(\sqrt(T))$의 bound를 얻었는지 193c1~207c1, 에 서술되어있다. 2578 에는 실험적으로 ouyang과 comparison한 결과가 있다.
+Addressing your two concerens, one with comparison with other works and the other with justification for assumptions, we first would like to mention that 
+
+Regarding the justification, let us provide justification for assumptions on (a) the prior distribution (Assumption 3.2) (b) injected noise $\nu$ (Assumption 3.3) (c) system parameter. 
+- For the prior distribution
+- 
+- 
 
 weakness 2
 두 번째 assumption은 prior에 관한 것이다. Prior는 우리가 선택해서 잡을 수 있기 때문에 restrictive한 assumption이 아니다. 세 번째 assumption은 우리가 action을 취할 때 고의적으로 넣는 perturbation이다. 다시 말해 우리가 구하고자 하는 unknown system parameter과는 무관한, 우리가 원하는 대로 잡을 수 있는 값이다.
 
-> Q1: One of the contributions outlined is "online learning of LQR without a stabilizing parameter set". I wonder how this compares to the work of Black-Box Control for Linear Dynamical Systems, Chen and Hazan 2021?
 
+> Q1: One of the contributions outlined is "online learning of LQR without a stabilizing parameter set". I wonder how this compares to the work of Black-Box Control for Linear Dynamical Systems, Chen and Hazan 2021?
 
 > Q2: How restrictive is the curvature assumption on $p_w$?
 
