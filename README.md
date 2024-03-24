@@ -11,25 +11,17 @@ Thank you for your insightful comments and engaging questions. Here are answers 
 
 # Reviewer 2
 
-We thank you for the review and appreciate your time reviewing our paper as well as some positive inputs.
-
-- Q1: Sec 2.2: Can truth be random? First, authors say that \theta^* is an unknown true parameter, but later in the same section, they say that \theta^* is random. Moreover, if you know the distribution of \theta^*, why do you update it using data? If you recall, the objective of the Bayesian experiment is to recover the truth, so if the truth itself is random, can we recover the random truth using the Bayesian posterior?
-
+We thank you for the review and appreciate your time reviewing our paper.
+- Q1: In the Bayesian regime, we focus on the distribution of the true system parameter by tracing the posterior. Once data is collected, the posterior distribution for the true system parameter is updated via Bayes' rule and it will have a peak around a certain value, which gives better 'confidence'. Point estimation for the true system parameter is also available via Maximum a posteriori estimation (MAP).  
 - Q2: 
-
-  - Concerning Assumption 2.1, we respectfully suggest that Assumption 2.1 aligns with established standards, equivalent as enforcing log-concavity on the density function and Lipschitz smoothness on the gradient of the density function, as discussed in (Dwivedi et al., 2018). Additionally, we note that another study addressing Bayesian regret bounds (Ouyang et al., 2019) introduces the Gaussian noise assumption, which remains consistent with our assumption. 
-
-  - As highlighted, the stochastic nature of the policy is indeed a central aspect, as we adopt the framework of Thompson Sampling (TS) where actions are expressed as $u_t=K x_t$ or $u_t=K x_t+ \nu_t$, as illustrated in Figure 1. The inclusion of Section 2.1 serves to inspire readers regarding such an exploration scheme, drawing parallels to the stochastic Linear Quadratic Regulation (LQR) problem under Gaussian perturbation, where the optimal control action is expressed as $u_t=K x_t$ (Theorem 2.2). Lastly, we acknowledge the typo regarding the notation $\pi_t: H_t \rightarrow \mathbb{R}^m$, which should be corrected to $\pi_t: H_t \rightarrow \mathbb{R}^{n_u}$, and we assure you that this will be reflected in the revised version.
-
-- Q3: Thank you for the suggestion. We will add the relation between $t$ and $k$ in the beginning of Section 2.3 for better clarity.
-
-
-- Q4:  We use $a_n = O(b_n)$ whenever $\limsup_{n \to \infty} |a_n/b_n |< \infty$, employ $a_n = \Omega(b_n)$ for $\liminf_{n \to \infty}|a_n/b_n |>0$. We also admit that $N \geq O( (\lambda_{\max} / \lambda_{\min})^2)$ should be changed to $N = \Omega( (\lambda_{\max} / \lambda_{\min})^2)$.  For the concentration, $X_N$ comes from the ULA given by $X_{j+1} = X_j - \gamma_j \nabla U(X_j) + \sqrt{2\gamma_j} W_j$ and its distribution is denoted by $p_N$. Since probability density functions exist for both $p_N$ and $p$, the integration in Theorem 2.3 measures the difference between them.
-
+  - Concerning Assumption 2.1, we would kindly refer the reviewer to Q2 of the 'Reviewer is77' due to the space constraint.
+  - It is true that the policy is stochastic rather than deterministic as the learning proceeds based on Thompson Sampling (TS). In our algorithm, we use the policy $u_t=K x_t$ or $u_t=K x_t+ \nu_t$. The inclusion of Section 2.1 serves to inspire readers regarding such an exploration scheme, drawing parallels to the stochastic Linear Quadratic Regulation (LQR) problem under Gaussian perturbation, where the optimal control action is deterministic and given as $u_t=K x_t$ (Theorem 2.2). We acknowledge the typo regarding the notation $\pi_t: H_t \rightarrow \mathbb{R}^m$, which should be corrected to $\pi_t: H_t \rightarrow \mathbb{R}^{n_u}$, and we assure you that this will be reflected in the revised version.
+- Q3: We will add the relation between $t$ and $k$ in the beginning of Section 2.3 for better clarity.
+- Q4: Here, $a_n = O(b_n)$ means $\limsup_{n \to \infty} |a_n/b_n |< \infty$, employ $a_n = \Omega(b_n)$ for $\liminf_{n \to 
+  - \infty}|a_n/b_n |>0$. We also admit that $N \geq O( (\lambda_{\max} / \lambda_{\min})^2)$ should be changed to $N = \Omega( (\lambda_{\max} / \lambda_{\min})^2)$.  
+  - $X_N$ comes from the ULA given in line 164, C2 and its distribution is denoted by $p_N$. The joint distribution between $p_N$ and $p$ comes from the shared Brownian motion, so the LHS in Theorem 2.3 should be changed to the Wasserstein distance.
 - Q5: The reduction of the number of iterations $N$ by implementing the preconditioner should not be obvious at first glance. A typical preconditioning used in ULA does not fully exploit the upper and lower bound of $P^{-1/2} \nabla^2 U P^{1/2}$ while we leverage the uniform bound of this quantity by introducing a structural assumption on $p_w$. Using this bound we could reduce the number of iterations achieving a better concentration.
-
-- Q6: Sec. 3.2: The idea for choosing stabilizing parameters is adapted from Abeille & Lazaric(2018). I think the authors should specify their contribution clearly.
-
+- Q6: Definitely ! We will specify it giving more credit to their work.
 
 
 # Reviewer 3
