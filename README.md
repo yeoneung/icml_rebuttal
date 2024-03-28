@@ -49,7 +49,67 @@ Thank you so much for carefully reading our paper and giving us invaluable input
 - Q3. Sorry for the confusion. For $\mathcal{J}\_k = \\{n\_i:n\_1 \< n\_2 \< \ldots \< n\_{k(k+1)/2}\\}$, we newly definte $X$ and $Y$ as $X=[ w\_{n\_1-1} \quad \cdots \quad_{n\_{k(k+1)/2}-1} ]^\top$ and $Y = [ K\_{\nu(n\_1)}w\_{n_1-1} \quad \cdots \quad K\_{\nu(n\_{k(k+1)/2})}w\_{ n\_{k(k+1)/2}-1} ]^{\top}$. Then it is clear to have such a form.
 - Q4: Regarding the tower rule on page 36 line 1927, if I understood your question correctly, we always mean the true system parameter random variable by $\overline \theta_*$ throughout the paper, and hence, conditioning with respect to the history collected before $k$th episode makes sense. In line 1927, $\overline \theta\_*$ in both equations are random variables following the exact posterior distribution. This way the inner expectation of  $\mathbb{E} [\mathbb{E}\_{\mu\_k, \tilde \mu\_k} [|\overline \theta\_\* -\theta\_k|\^2 | h\_{t\_k}]]$ is taken for two distributions $\mu_k$ and $\tilde \mu\_k$ that share the Brownian motion, and outer expectation is taken over all histories before the $k$ th episode.
 
-For the minor problems, we will be updated in the revised version.
+
+
+For minor problems raised, here are the answers to them. We would first deeply thank the reviewer for spending time and carefully reading our paper. Your comments are mostly to the point and we believe that they will help us significantly improve the quality of the paper.
+
+1. The term ULA first appears in line 61. We will change 'Preconditioned ULA for approximate TS' to 'Preconditioned Unadjusted Langevin Algorithm (ULA) for approximate TS' in the revised version.
+
+2-4. You are absolutely right. They will be corrected accordingly.
+
+5. Conditioning should be removed. All of them will be changed to $p\_w (x\_{t+1} - \Theta\^{\top}  z\_t )$.
+
+6. Argmin is computed via Newton's method. The minimum is always achieved as the potential $U$ always convex. We will specify this part in the revised version.
+
+7. You are right. Thank you for pointing out.
+
+8-9. Thank you for the suggestion. We agree that it makes more sense to define $V(\tau)= \frac{1}{2} e\^{\alpha \tau}|\theta\_\tau-\theta\_*|\_{P\_t}\^2$ where $\theta\_\tau$ is a solution $\mathrm{d}\theta\_s = -P\_t^{-1}\nabla U\_t(\theta\_s)\mathrm{d}s + \sqrt{2}P\_t\^{-\frac{1}{2}}\mathrm{d}B\_s$ at time $\tau$ given $t$ and initial state $\theta_0$ that can be any vector. The initial vector should have been specified in the statement as pointed out.
+
+10-11. We admit that there are some typos. The updated proof will include the following. 
+- $F_1$: The estimate for $F_1$ presented in lines 992 - 1007 will result in 
+
+$F_1 \leq \frac{\alpha-2m}{2}\int_0\^\tau e\^{\alpha \eta}|\theta\_\eta-\theta\_*|\_{P\_t}\^2 \mathrm{d}\eta+\int\_0\^\tau e\^{\alpha \eta} \nabla\_{\theta} U\_1(\theta\_\ast)\^{\top} (\theta_{\ast}-\theta\_\eta)\mathrm{d}\eta+\int\_0\^\tau e\^{\alpha \eta} \nabla\_{\theta} U\^\prime\_t(\theta\_\ast)\^{\top}(\theta\_\ast-\theta\_\eta)\mathrm{d}\eta$.
+
+Therefore, lines 1025 - 1033 are modified to
+
+$F\_1 \leq \frac{\alpha-m}{2}\int\_0\^\tau e\^{\alpha \eta}|\theta\_\eta-\theta\_\ast|\_{P\_t}\^2 \mathrm{d}\eta +\frac{1}{m} \int\_0\^\tau e\^{\alpha \eta} |P\_t\^{-\frac{1}{2}}\nabla\_{\theta} U\_1(\theta\_\ast)|\^2\mathrm{d}\eta+\frac{1}{m} \int\_0\^\tau e\^{\alpha \eta} |P\_t\^{-\frac{1}{2}}\nabla\_{\theta} U\^\prime\_t(\theta\_\ast)|\^2\mathrm{d}\eta$.
+
+Choosing $\alpha=m$, the final result in line 1037 will be modified to
+$F_1 \leq C_0 e^{\alpha \tau}+\frac{1}{m}\int_0^\tau e^{\alpha \eta}|P_t^{-\frac{1}{2}}\nabla_{\theta} U^\prime_t(\theta_\ast)|^2 \mathrm{d}\eta$.
+
+- $F_3$: Line 988 should be updated to
+$F_3 = \sqrt{2} \int_0^\tau e^{\alpha \eta} (\theta_\eta - \theta_\ast)^{\top}P_t^{\frac{1}{2}}\mathrm{d}B_\eta$.
+Accordingly, line 1056 should is modified to
+$F_3 \leq \mathbb{E} \bigg[\bigg(\frac{16 e^{\alpha \Delta}}{\alpha}\bigg)^{\frac{1}{2}}\Big (\sup_{0\leq \tau \leq \Delta}e^{\alpha \tau}|\theta_\tau-\theta_\ast|_{P_t}^2 \Big )^{\frac{1}{2}} \bigg]$.
+
+13-14. Thank you for pointing out. You are comments are all correct and to the point. They will be all reflected in the new version of the paper. Regarding line 1461, 
+
+'we also have the following event is a subevent of $E_{1,k}$:' 
+
+should be changed to
+
+ 'we can define $E_{3,k}$ that contains the event $E_{1,k}$:' 
+
+15. You are correct, it should be $|L_s|^2$ instead of $|L_s|$, and hence, the constant $\sqrt{M_K^2+2}$ used for $E_{4,k}$ and $E_{5,k}$ needs to be changed to just $M_K^2+2$. As you might have noticed already, it does not change the core property, the persistence of excitation (growth of $\lambda_{\min}$. It will be corrected in the updated version for sure.
+
+16. Correct. We will fix it to $1/\sqrt{\lambda_{\min,t}}$.  
+
+17. Yes, it should be $|\tilde \theta_t-\theta_*| > \epsilon_0$.
+
+18. Thank you so much, we mean $J$ is Lipscthiz continuous in $\mathcal{C}$.
+
+19. You are right! It should be 4.
+
+20. Here is the corrected proof.
+$\mathbb{E} \bigg [\sum\_{k=1}\^{n\_T} \sum\_{t=t\_k}\^{t\_{k+1} -1} |\nu\_t|\^2|\bar{\theta}\_\ast - \tilde{\theta}\_k|\bigg ] \leq \sum\_{t=t\_k}\^{t\_{k+1} -1} \sqrt{\mathbb{E}[|\nu_t|^4]}\sqrt{\mathbb{E}[|\bar{\theta}\_\ast - \tilde{\theta}\_k|^2] } \leq 2(4\bar{L}^2_\nu)^2 \sum\_{k=1}\^{n\_T} \sum\_{t=t\_k}\^{t\_{k+1} -1}\frac{1}{\sqrt{t_k}}$.
+
+21. We appreciate again. We will fix it.
+
+22. We will add the reference 'Dynamic Programming and Optimal Control 4th Edition, Volume 2' by Dimitri P. Bertsekas.
+
+
+
+
 
 # Reviewer 5
 
