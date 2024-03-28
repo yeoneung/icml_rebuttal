@@ -8,25 +8,51 @@ Thanks in advance,
 
 # Reviewer 1
 Thank you for your insightful comments and engaging questions. Here are answers to your concerns and questions.
-- Q1:
-  - Equation (8) demonstrates that the iteration count scales with $\lambda\_{\min}$, approximately $\lambda_{\min} \approx 1/n$ where $n$ represents the state dimension. Consequently, the iteration growth remains at most linear in $n$. Although not explicitly stated in the paper, our computations for $n=2,4,6,8,10$ reveal sublinear growth of the number of step iterations.
+
+> Q1: How does the integration of preconditioned Langevin dynamics with Thompson sampling specifically address the challenge of sampling efficiency in high-dimensional spaces, and what inspired this novel approach over other potential methods?
+
+- Answer to Q1:
+  - Equation (8) demonstrates that the iteration count scales with $\lambda\_{\min}$, approximately $\lambda_{\min} \approx 1/n$ where $n$ represents the state dimension. Consequently, the iteration growth remains at most linear in $n$. As seen in the middle of the [page](https://ibb.co/kmf19C6),  our empirical verification for $n=2,4,6,8,10$ reveals that the number of step iterations does not scale exponentially in dimension when the preconditioner is used. The right of [page](https://ibb.co/kmf19C6) shows (total computation time)/$n\^k$ with various values of $k$ where $n$ denotes the dimension. For those experiments, $A\_\ast$ and $B\_\ast$ in [page](https://ibb.co/kmf19C6). 
+
   - Our approach is motivated by Theorem 2.3, where it is established that the stepsize $\gamma= O(\lambda_{\min}/\lambda_{\max}^2)$ and the number of iterations $N$ satisfies $N = O((\lambda_{\max}/\lambda_{\min})^2)$ for achieving a convergence rate of $1/\lambda_{\min}$ with ULA. Normalizing the potential $\nabla^2U$ with a preconditioner derived from the data (Lemma 3.1), we achieve a uniform bound on the curvature of $\nabla^2 U$, enabling a smaller number of step iterations as suggested in (8) while attaining better regret bound.
-- Q2: Relaxing the restrictive assumption in (Ouyang et al., 2019) results in exponential growth of the state norm and escalating costs. While introducing a stabilizing controller in prior work mitigates this issue, selecting such a controller without knowledge of the true system parameters is impractical. To address this challenge, we employ a verifiable compact set as utilized by (Abeille & Lazaric, 2018). Our rigorous analysis demonstrates that the concentration between distributions of approximate and the true system parameter converges at a rate of $\tilde O(1/\sqrt{\lambda_{\min}})$. We deduce that $\lambda_{\min}$ increases polynomially over time $t$ as the learning progresses. To achieve this, we inject noise once in each episode. Combining them, we demonstrate that the state achieves a uniform bound, a critical aspect where the key difficulty lies in removing the aforementioned restrictive assumption.
-- Q3: Sampling from a posterior distribution, such as Thompson sampling, often demands significant computational resources in learning LQR problems. The implementation of preconditioning aims to alleviate this challenge. While sample complexity for naive ULA is well-studied, those for preconditioned ULA are relatively less explored. In our paper, we introduce modified stepsize and the number of step iterations, leading to improved computational efficiency. Besides, our carefully chosen parameters result in better regrets.
+
+> Q2: Given the paper's reduction of restrictive assumptions in achieving an $O(\sqrt{T})$ regret bound, what theoretical or practical limitations were encountered in removing these assumptions, and how were they overcome?
+
+- Answer to Q2: Relaxing the restrictive assumption in (Ouyang et al., 2019) results in exponential growth of the state norm and escalating costs. While introducing a stabilizing controller in prior work mitigates this issue, selecting such a controller without knowledge of the true system parameters is impractical. To address this challenge, we employ a verifiable compact set as utilized by (Abeille & Lazaric, 2018). Our rigorous analysis demonstrates that the concentration between distributions of approximate and the true system parameter converges at a rate of $\tilde O(1/\sqrt{\lambda_{\min}})$. We deduce that $\lambda_{\min}$ increases polynomially over time $t$ as the learning progresses. To achieve this, we inject noise once in each episode. Combining them, we demonstrate that the state achieves a uniform bound, a critical aspect where the key difficulty lies in removing the aforementioned restrictive assumption.
+
+> Q3: Can you summarize the core difficulties in theoretical analysis of this integration? How do overcome them?
+
+- Answer to Q3: Sampling from a posterior distribution, such as Thompson sampling, often demands significant computational resources in learning LQR problems. The implementation of preconditioning aims to alleviate this challenge. While sample complexity for naive ULA is well-studied, those for preconditioned ULA are relatively less explored. In our paper, we introduce modified stepsize and the number of step iterations, leading to improved computational efficiency. Besides, our carefully chosen parameters result in better regrets.
 
 # Reviewer 2
 We thank you for the review and appreciate your time reviewing our paper.
-- Q1: In the Bayesian regime, we focus on the distribution of the true system parameter by tracing the posterior. Once data is collected, the posterior distribution for the true system parameter is updated via Bayes' rule and it will have a peak around a certain value, which gives higher 'confidence'. Point estimation for the true system parameter is also available via Maximum a posteriori estimation (MAP).  
-- Q2: 
-  - Concerning Assumption 2.1, we would kindly refer to the answer to Q2 raised by 'Reviewer is77' due to the space constraint.
+
+> Q1: Sec 2.2: Can truth be random? First, authors say that $\theta\^\ast$ is an unknown true parameter, but later in the same section, they say that $\theta\^\ast$ is random. Moreover, if you know the distribution of $\theta\^\ast$, why do you update it using data? If you recall, the objective of the Bayesian experiment is to recover the truth, so if the truth itself is random, can we recover the random truth using the Bayesian posterior?
+
+- Answer to Q1: In the Bayesian regime, we focus on the distribution of the true system parameter by tracing the posterior. Once data is collected, the posterior distribution for the true system parameter is updated via Bayes' rule and it will have a peak around a certain value, which gives higher 'confidence'. Point estimation for the true system parameter is also available via Maximum a posteriori estimation (MAP).
+
+> Q2: Assumption 2.1: Are these standard assumptions? Please discuss 101C2- Why is the policy deterministic, given that the authors build on TS? $u\_t$ dim is $n\_u$, so why policy maps to $\mathbb{R}\^m$?
+
+- Answer to Q2: 
+  -  We respectfully claim that Assumption 2.1 aligns with established standards, equivalent to enforcing log-concavity on the density function and Lipschitz smoothness on the gradient of the density function as discussed in (Dwivedi et al., 2018). Additionally, we note that another study addressing Bayesian regret bounds (Ouyang et al., 2019) introduces the Gaussian noise assumption, which is a special case of our assumption. To be more illustrative, let us consider probability density functions defined in $\mathbb{R}$. Then any probability density function $p\_w(z) \sim \mathcal{N}(0, {\sigma}\^2)$ where $ \frac{1}{\overline m}\leq \sigma\^2 \leq \frac{1}{\underline m}$ satisfies Assumption 2.1. One can also include some asymmetric distributions as well. For instance, for $z\in \mathbb{R}$, one can set $p_w(z)$ to satisfy $-\frac{d\^2 \log p\_w(z)}{d z\^2}=\underline m$ if $z<-1$, $-\frac{d\^2 \log p\_w(z)}{d z\^2}=\overline m$ if $z>1$ and $-\frac{d\^2 \log p\_w(z)}{d z\^2}=(\overline m -\underline m)/2 \cdot z + \underline m + (\overline m - \underline m )/2$ if $z\in(-1,1)$, which represents an asymmetric probability distribution. Hence, we carefully claim that  Assumption 2.1 seems to be restrictive but includes many other distributions beyond Gaussian distributions.
   - It is true that the policy is stochastic rather than deterministic as the proposed policy is given by $u_t=K x_t$ or $u_t=K x_t+ \nu_t$ using sampled system parameters. The inclusion of Section 2.1 serves to inspire readers regarding such an exploration scheme, drawing parallels to the stochastic Linear Quadratic Regulation (LQR) problem under Gaussian perturbation, where the optimal control action is deterministic and given as $u_t=K x_t$ (Theorem 2.2). We acknowledge the typo regarding the notation $\pi_t: H_t \rightarrow \mathbb{R}^m$, which should be corrected to $\pi_t: H_t \rightarrow \mathbb{R}^{n_u}$, and we assure you that this will be reflected in the revised version.
-- Q3: We will add the relation between $t$ and $k$ in the beginning of Section 2.3 for better clarity.
-- Q4: 
+
+> Q3: Section 2.3: it would be helpful if the authors clearly described the relation between episode k and time there. In particular, I am confused because it is not clear whether the posterior is sampled only at the beginning of the episode or at each time t after it is updated. (This is only clear after looking at the algorithm)
+
+- Answer to Q3: We will add the relation between $t$ and $k$ in the beginning of Section 2.3 for better clarity.
+
+> Q4: Theorem 2.3: Please define O() precisely. What does $N \geq O( (\lambda\_{\max} / \lambda\_{\min})\^2)$ mean? Moreover, how does this theorem imply the concentration of $X\_n$ to sample from $p$?
+
+- Answer to Q4:  
   - Here, $a_n = O(b_n)$ means $\limsup_{n \to \infty} |a_n/b_n |< \infty$, and $a_n = \Omega(b_n)$ indicates $\liminf_{n \to \infty}|a_n/b_n |>0$. We also admit that $N \geq O( (\lambda_{\max} / \lambda_{\min})^2)$ should be changed to $N = \Omega( (\lambda_{\max} / \lambda_{\min})^2)$.  
   - $X_N$ comes from the ULA given in line 164, C2 and its distribution is denoted by $p_N$ after $N$ iterations. The joint distribution between $p_N$ and $p$ comes from the shared Brownian motion, so the LHS in Theorem 2.3 should be changed to the Wasserstein distance.
-- Q5: The reduction in the number of iterations $N$ by implementing the preconditioner is not obvious at first glance. A typical preconditioning used in ULA does not fully exploit the upper and lower bound of $P^{-1/2} \nabla^2 U P^{1/2}$. To obtain the reduction. we need to carefully design stepsize and iterations leveraging the uniform bound (Lemma A.3). Based on it, we reduce the number of iterations achieving a better concentration.
-- Q6: Definitely ! We will specify it giving more credit to their work.
+ 
+> Q5: 197-202C2: Is it obvious that preconditioning by $P\_t$ (7) reduces $N$? If so, how? How is the preconditioning introduced in the main algorithm different from the typical preconditioning used in ULA?
 
+- Answer to Q5: The reduction in the number of iterations $N$ by implementing the preconditioner is not obvious at first glance. A typical preconditioning used in ULA does not fully exploit the upper and lower bound of $P^{-1/2} \nabla^2 U P^{1/2}$. To obtain the reduction. we need to carefully design stepsize and iterations leveraging the uniform bound (Lemma A.3). Based on it, we reduce the number of iterations achieving a better concentration.
+
+> Q6: Sec. 3.2: The idea for choosing stabilizing parameters is adapted from Abeille&Lazaric(2018). I think the authors should specify their contribution clearly.
+- Answer to Q6: Of course! We will specify it and clearly distinguish our contribution from Abeille&Lazaric(2018)
 
 # Reviewer 3
 We appreciate all your invaluable comments. To address your concerns, we emphasize the following points.
