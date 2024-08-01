@@ -217,3 +217,47 @@ algorithm for unknown linear systems. In 2022 IEEE 61st Conference on Decision a
 [7] Dwivedi, R., Chen, Y., Wainwright, M. J., and Yu, B. Logconcave sampling: Metropolis-Hastings algorithms are fast! In Conference on learning theory, pp. 793–797. PMLR, 2018.
 
 [8] Abeille, M. and Lazaric, A. Improved regret bounds for Thompson sampling in linear quadratic control problems. In International Conference on Machine Learning, pp.1–9. PMLR, 2018.
+
+
+
+
+
+# Reviewer 1
+
+
+Thank you for your insightful comments and engaging questions. Here are answers to your concerns and questions.
+
+>From a theoretical guarantee perspective, this work analyzes the expected regret, whereas previous works have focused more on high probability bounds, which better reflect the impact of noise.
+
+>In terms of noise assumptions, adaptive control typically assumes that the noise only has bounded second moments, which is more general or classical. While this paper relaxes some assumptions compared to certain works, it still imposes a strong assumption. The purpose of such an assumption is often to obtain non-asymptotic theoretical guarantees. Traditional adaptive control results are mostly asymptotic. Additionally, I am not sure how much weaker your new assumption is compared to the Gaussian assumption, because generally, bounded higher moments can also provide non-asymptotic guarantees.
+
+
+>From the perspective of the development of online adaptive control, the significance of this work is not very evident. The main contribution of this work, in my opinion, is removing the term in the regret bound, achieving a clean bound. However, there are many more important breakthroughs needed, such as focusing on more general curvature settings, such as convex or strongly convex, Lipschitz or smooth settings, and allowing for more adverse noise conditions, even non-stochastic (online non-stochastic control).
+
+>The experiments lack comparison with similar algorithms. There are many works studying online adaptive control for LQR, as mentioned in the paper, but the experiments only compare with one algorithm.
+
+
+
+# Reviewer 2
+>Suppose $\theta_t$ is the target variate, its stationary distribution should be the same as in the unadjusted version. Why would we expect any improvement in the exact posterior rate (Proposition 4.2) rather than merely recovering the rate noted in [1]?
+
+>The better convergence rate for preconditioned LMC seems to stem from assumptions related to the condition number, which only shows an improvement with a better constant number.
+
+>With the same rate, it remains unclear why preconditioned LMC would provide better performance in concentration rates and regrets. Could the authors clarify how their concentration rate differs from previous studies [1]? Additionally, does this affect the results in Section 4.3 and the optimal regrets?
+
+>In Algorithm 1 Line 12, does the author use the full gradient or stochastic gradient for the objective?
+
+>What is the prior used in the analysis? Does that affect the results?
+
+# Reviewer 3
+
+>The effectiveness of the excitation mechanism and preconditioner may heavily depend on specific problem settings and may not generalize well.
+
+>There is limited comparison with existing state-of-the-art methods in stochastic bandits or RL algorithms, which could provide insights into the algorithm's advantages and limitations in different contexts.
+
+>Why don't we directly implement TS on LQR? Can you explain the motivation of applying ULA?
+
+>The assumptions in this paper are strong. Can you explain their necessity and realizability? What theoretical problems would be encountered without these assumptions?
+
+>What computational challenges or practical considerations arise when scaling the algorithm to high-dimensional state spaces?
+
